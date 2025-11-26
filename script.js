@@ -327,11 +327,11 @@ function renderGaugeChart(gasName, value, min, max, alarmMin, unit) {
     const canvasEl = document.getElementById(canvasId);
     if (!canvasEl) return;
 
-    // [แก้ไข] ปัดเศษทศนิยมให้เหลือ 2 ตำแหน่งเสมอ
+    // [แก้ไขจุดที่ 1] ปัดเศษทศนิยมให้เหลือ 2 ตำแหน่งเสมอ ตั้งแต่เริ่มต้น
     const displayValue = parseFloat(value.toFixed(2)); 
     
     const chartValue = Math.min(Math.max(0, displayValue), max); 
-    const remaining = max - chartValue;
+    const remaining = parseFloat((max - chartValue).toFixed(2));
     
     const isCritical = displayValue <= alarmMin || displayValue > max;
     
@@ -358,7 +358,7 @@ function renderGaugeChart(gasName, value, min, max, alarmMin, unit) {
             ctx.font = '700 1.5rem "Noto Sans Thai", sans-serif'; 
             ctx.fillStyle = isLabelCritical ? CRITICAL_COLOR : config.color; 
             
-            // [แก้ไข] แสดงผลตัวเลขทศนิยม 2 ตำแหน่ง (.toFixed(2) มีอยู่แล้ว แต่ย้ำเพื่อความชัวร์)
+            // [แก้ไขจุดที่ 2] บังคับแสดงผลตัวเลขทศนิยม 2 ตำแหน่ง (.toFixed(2)) เวลาวาดลงบน Canvas
             ctx.fillText(`${actualValue.toFixed(2)}`, centerX, centerY - 15); 
             
             ctx.font = '400 0.8rem "Noto Sans Thai", sans-serif';
