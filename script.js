@@ -463,7 +463,7 @@ function renderOrUpdateLineChart(gasName, chartId, data) {
                 size: 12 
             },
             formatter: (value) => {
-                return value.toFixed(2); 
+                return Math.round(value); // ✅ ปัดเศษเป็นจำนวนเต็ม 
             }
         }
     };
@@ -1342,3 +1342,4 @@ window.onload = function() {
         });
     }
 }
+
